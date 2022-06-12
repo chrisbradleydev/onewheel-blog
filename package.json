@@ -51,6 +51,7 @@
     "@testing-library/user-event": "^14.2.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/eslint": "^8.4.3",
+    "@types/marked": "^4.0.3",
     "@types/node": "^17.0.41",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
