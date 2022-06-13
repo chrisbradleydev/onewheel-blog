@@ -3,6 +3,8 @@ import {
   useActionData,
   useTransition,
   useLoaderData,
+  useCatch,
+  useParams,
 } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
@@ -25,6 +27,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return json<LoaderData>({});
   }
   const post = await getPost(params.slug);
+  if (!post) {
+    throw new Response("Not Found", { status: 404 });
+  }
   return json<LoaderData>({ post });
 };
 
@@ -157,4 +162,13 @@ export default function NewPostRoute() {
       </div>
     </Form>
   );
+}
+
+export function CatchBoundary() {
+  const { status } = useCatch();
+  const { slug } = useParams();
+  if (status === 404) {
+    return <div>Uh oh! This post with the slug "{slug}" does not exist.</div>;
+  }
+  throw new Error(`Unsupported thrown response status code: ${status}`);
 }
