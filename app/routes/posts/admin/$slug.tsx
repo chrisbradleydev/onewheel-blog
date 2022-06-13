@@ -27,6 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return json<LoaderData>({});
   }
   const post = await getPost(params.slug);
+  throw "wtf";
   if (!post) {
     throw new Response("Not Found", { status: 404 });
   }
@@ -171,4 +172,16 @@ export function CatchBoundary() {
     return <div>Uh oh! This post with the slug "{slug}" does not exist.</div>;
   }
   throw new Error(`Unsupported thrown response status code: ${status}`);
+}
+
+export function ErrorBoundary({ error }: { error: unknown }) {
+  if (error instanceof Error) {
+    return (
+      <div className="text-red-600">
+        Oh no, something went wrong!
+        <pre>{error.message}</pre>
+      </div>
+    );
+  }
+  return <div className="text-red-600">Whoopsies!</div>;
 }
