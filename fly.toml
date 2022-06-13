@@ -1,4 +1,4 @@
-app = "onewheel-blog-5d06"
+app = "onewheel-blog-76fc"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
