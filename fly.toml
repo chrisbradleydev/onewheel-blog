@@ -1,23 +1,23 @@
 app = "onewheel-blog-76fc"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = [ ]
+processes = []
 
 [experimental]
-allowed_public_ports = [ ]
-auto_rollback = true
-cmd = "start.sh"
-entrypoint = "sh"
+  allowed_public_ports = []
+  auto_rollback = true
+  cmd = "start.sh"
+  entrypoint = "sh"
 
 [mounts]
-source = "data"
-destination = "/data"
+  source = "data"
+  destination = "/data"
 
 [[services]]
-internal_port = 8_080
-processes = [ "app" ]
-protocol = "tcp"
-script_checks = [ ]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
 
   [services.concurrency]
   hard_limit = 25
@@ -25,12 +25,12 @@ script_checks = [ ]
   type = "connections"
 
   [[services.ports]]
-  handlers = [ "http" ]
+  handlers = ["http"]
   port = 80
   force_https = true
 
   [[services.ports]]
-  handlers = [ "tls", "http" ]
+  handlers = ["tls", "http"]
   port = 443
 
   [[services.tcp_checks]]
@@ -47,4 +47,4 @@ script_checks = [ ]
   protocol = "http"
   timeout = "2s"
   tls_skip_verify = false
-  headers = { }
+  headers = {}
