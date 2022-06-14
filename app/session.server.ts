@@ -3,6 +3,9 @@ import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+import { getEnv } from "./env.server";
+
+global.ENV = getEnv();
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
